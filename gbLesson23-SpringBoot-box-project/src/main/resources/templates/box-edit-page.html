@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Boxes page</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Программа для работы с коробками</h1>
+
+    <h4>Модификация коробки:</h4>
+    <form th:action="@{'/boxes/edit'}" th:object="${box}" method="post">
+        <input th:field="*{id}" hidden class="form-control form-control-sm">
+        <div class="form-group">
+            <label>Цвет</label>
+            <input th:field="*{color}" class="form-control form-control-sm">
+        </div>
+        <div class="form-group">
+            <label>Размер</label>
+            <input th:field="*{size}" class="form-control form-control-sm">
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+
+
+</body>
+</html>

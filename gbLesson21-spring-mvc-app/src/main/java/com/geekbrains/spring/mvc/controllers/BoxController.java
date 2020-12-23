@@ -1,0 +1,38 @@
+package com.geekbrains.spring.mvc.controllers;
+
+import com.geekbrains.spring.mvc.model.Box;
+import com.geekbrains.spring.mvc.services.BoxService;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+@RequestMapping("/boxes")
+public class BoxController {
+    private BoxService boxService;
+
+    public BoxController(BoxService boxService) {
+        this.boxService = boxService;
+    }
+
+    //http://localhost:8189/app/boxes/all
+    @GetMapping("/all")
+    public String getAllBoxes(Model model) {
+        model.addAttribute("frontBoxes", boxService.getAllBoxes());
+        return "all_boxes";
+    }
+
+    @PostMapping("/add")
+//    public String addNewBox(@RequestParam Long id, @RequestParam String color, @RequestParam int size) {
+    public String addNewBox(@ModelAttribute Box box) {//Spring за нас соберет эти коробки, автосборка объекта из набора RequestParam
+        boxService.save(box);
+        return "redirect:/boxes/all";//перенаправляем
+    }
+
+    @PostMapping("/json/add")//через Postman
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addNewJsonBox(@RequestBody Box box) {//для добавления в формате JSON
+        boxService.save(box);
+    }
+}

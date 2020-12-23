@@ -1,0 +1,10 @@
+package com.geekbrains.box.project.repositories;
+
+import com.geekbrains.box.project.entities.Box;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface BoxRepository extends JpaRepository<Box, Long> {
+}
